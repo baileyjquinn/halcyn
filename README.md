@@ -1,16 +1,55 @@
-# React + Vite
+# Halcyn Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The **Halcyn Stack** is a reusable framework for deploying AI-powered small business websites. Built with Vite, React, Tailwind CSS, and Supabase.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+cp .env.example .env   # Add Supabase credentials
+npm run dev            # Dev server on http://localhost:5173
+npm run build          # Production build → dist/
+```
 
-## React Compiler
+## Modular Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+  lib/                 # Supabase client, config
+  components/
+    layout/            # Header, Footer
+    features/          # Hero, FeaturesSection, LeadCapture, CTASection
+  templates/           # Reusable niche templates (Home Services, etc.)
+  pages/               # Route-based pages
+```
 
-## Expanding the ESLint configuration
+## Key Components
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **LeadCapture** — Collects leads and stores them in Supabase `leads` table
+- **FeaturesSection** — Configurable feature grid
+- **Hero** — Gradient hero with CTA buttons
+- **Header/Footer** — Responsive layouts
+
+## Environment Variables
+
+See `.env.example` for all required variables.
+
+## Supabase Setup
+
+Create a `leads` table:
+
+```sql
+CREATE TABLE leads (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  message TEXT,
+  source TEXT DEFAULT 'website',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+Powered by **Halcyn** — AI-powered business websites.

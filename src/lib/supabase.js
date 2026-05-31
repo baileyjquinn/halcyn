@@ -1,5 +1,5 @@
 /**
- * AutoBiz Stack – Supabase Client
+ * Halcyn Stack – Supabase Client
  *
  * Singleton Supabase client used across all components.
  * Import this file wherever you need database or auth access.

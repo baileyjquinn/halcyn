@@ -6,7 +6,7 @@ export default function CTASection() {
           Start Building Your AI-Powered Site Today
         </h2>
         <p className="mt-4 text-lg text-blue-100">
-          Join hundreds of small businesses using AutoBiz Stack to grow online.
+          Join hundreds of small businesses using Halcyn Stack to grow online.
         </p>
         <a
           href="#lead-capture"

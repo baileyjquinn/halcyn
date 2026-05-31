@@ -46,7 +46,7 @@ export default function FeaturesSection() {
             Everything You Need to Grow
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            The AutoBiz Stack gives small businesses a complete digital toolkit — no
+            The Halcyn Stack gives small businesses a complete digital toolkit — no
             technical skills required.
           </p>
         </div>
