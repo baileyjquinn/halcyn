@@ -1,12 +1,15 @@
 /**
- * Halcyn Stack — Switch between templates
+ * Halcyn Stack — Switch between client demo templates
  *
  * To use a different template, change the import below.
- * Available: SouthEndPlumbingDemo (default), App (generic landing page)
+ * Available:
+ *   - SouthEndPlumbingDemo
+ *   - HometownElectricDemo
+ *   - App (generic landing page)
  */
 
-import SouthEndPlumbingDemo from './templates/SouthEndPlumbingDemo.jsx'
+import HometownElectricDemo from './templates/HometownElectricDemo.jsx'
 
 export default function App() {
-  return <SouthEndPlumbingDemo />
+  return <HometownElectricDemo />
 }
