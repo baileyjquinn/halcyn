@@ -1,16 +1,16 @@
 /**
  * Halcyn Stack — Switch between client demo templates
  *
- * To use a different template, change the import below.
- * Available:
- *   - SouthEndPlumbingDemo (plumbing, dark blue)
- *   - HometownElectricDemo (electrician, amber/orange)
- *   - SteadfastPlumbingDemo (plumbing, red/urgency)
- *   - DrainRightPlumbingDemo (plumbing, teal)
+ * Available templates:
+ *   SouthEndPlumbingDemo — plumbing, dark blue
+ *   HometownElectricDemo — electrician, amber/orange
+ *   SteadfastPlumbingDemo — plumbing, red/urgency
+ *   DrainRightPlumbingDemo — plumbing, teal
+ *   ElectricExpressDemo — electrician, purple
  */
 
-import SteadfastPlumbingDemo from './templates/SteadfastPlumbingDemo.jsx'
+import ElectricExpressDemo from './templates/ElectricExpressDemo.jsx'
 
 export default function App() {
-  return <SteadfastPlumbingDemo />
+  return <ElectricExpressDemo />
 }
