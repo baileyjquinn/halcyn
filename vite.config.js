@@ -7,5 +7,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
+    allowedHosts: ['5173-ixv27tmg4iwvl7u7wjou8.e2b.app'],
   },
 })

@@ -15,6 +15,10 @@ const config = {
     tagline: import.meta.env.VITE_APP_TAGLINE || 'Your AI-Powered Business Hub',
     supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'hello@halcyn.dev',
   },
+  payments: {
+    setupLink: import.meta.env.VITE_STRIPE_SETUP_URL || 'https://buy.stripe.com/00w9AV2ONcXG6tp8K8dEs00',
+    retainerLink: import.meta.env.VITE_STRIPE_RETAINER_URL || 'https://buy.stripe.com/28EdRbahf1eY4lh0dCdEs01',
+  },
 }
 
 export default config

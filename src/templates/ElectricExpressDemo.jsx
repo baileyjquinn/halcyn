@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { getSupabase } from '../lib/supabase'
+import Chatbot from '../components/features/Chatbot'
 
 /**
  * Electric Express CLT — Halcyn Demo Landing Page
@@ -11,48 +12,7 @@ import { getSupabase } from '../lib/supabase'
  * Wedge: $997 setup + $97/mo — Projected ROI: 50-75x ($5,000–$7,500/mo)
  */
 
-function ChatBubble() {
-  const [open, setOpen] = useState(false); const [step, setStep] = useState(0)
-  const [name, setName] = useState(''); const [phone, setPhone] = useState('')
-  const [issue, setIssue] = useState(''); const [submitted, setSubmitted] = useState(false)
-  const [sending, setSending] = useState(false); const [error, setError] = useState('')
-  const messagesEndRef = useRef(null)
-  const botMessages = ["Hi there! ⚡ Electrical emergency? Tell me what's happening.", "What's your name?", "And a phone number?", "Last — what's the electrical issue?"]
-  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [step, submitted])
-  function handleUserResponse(v) { if (step === 1) setName(v); else if (step === 2) setPhone(v); else if (step === 3) setIssue(v); if (step < 3) setStep(s => s + 1) }
-  async function handleSubmit() {
-    setSending(true); setError(''); const supabase = getSupabase()
-    const lead = { name, email: 'demo@electricexpressclt.com', phone, message: `Issue: ${issue} | Electric Express Demo`, source: 'chatbot-electric-express' }
-    if (!supabase) { console.log('Lead:', lead); setSubmitted(true); setSending(false); return }
-    const { error: err } = await supabase.from('leads').insert([lead])
-    if (err) setError(err.message); else setSubmitted(true); setSending(false)
-  }
-  function resetChat() { setStep(0); setSubmitted(false); setName(''); setPhone(''); setIssue(''); setError('') }
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {open && (<div className="w-80 sm:w-96 rounded-2xl border border-gray-200 bg-white shadow-2xl">
-        <div className="flex items-center gap-3 rounded-t-2xl bg-purple-600 px-4 py-3 text-white">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500 text-lg font-bold">⚡</div>
-          <div><p className="text-sm font-semibold">Halcyn AI Assistant</p><p className="text-xs text-purple-200">Online • 24/7</p></div>
-        </div>
-        <div className="h-72 space-y-3 overflow-y-auto p-4">
-          {!submitted ? (<>
-            <div className="flex"><div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2.5 text-sm text-gray-800">{botMessages[step]}</div></div>
-            <div className="mt-2">
-              {step === 0 && <button onClick={() => handleUserResponse('yes')} className="rounded-xl bg-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-purple-700">⚡ I need an electrician</button>}
-              {step === 1 && <input type="text" placeholder="Your name..." value={name} onChange={e => setName(e.target.value)} onKeyDown={e => e.key === 'Enter' && name && handleUserResponse(name)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-200" autoFocus />}
-              {step === 2 && <input type="tel" placeholder="(704) 555-..." value={phone} onChange={e => setPhone(e.target.value)} onKeyDown={e => e.key === 'Enter' && phone && handleUserResponse(phone)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-200" autoFocus />}
-              {step === 3 && (<div className="space-y-2"><select value={issue} onChange={e => setIssue(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-purple-500 focus:ring-2 focus:ring-purple-200"><option value="">Select...</option><option value="Power outage">🚨 Power outage</option><option value="Faulty wiring">🔌 Faulty wiring</option><option value="Panel upgrade">⚡ Panel upgrade</option><option value="Wiring inspection">📋 Wiring inspection</option><option value="Other">Other</option></select>{issue && <button onClick={handleSubmit} disabled={sending} className="mt-2 w-full rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700 disabled:opacity-60">{sending ? 'Sending...' : '✅ Get Help'}</button>}</div>)}
-              {step > 0 && step < 3 && <button onClick={() => handleUserResponse('')} className="mt-2 w-full rounded-xl bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-purple-700">Continue →</button>}
-            </div>
-          </>) : (<div className="flex flex-col items-center justify-center py-8 text-center"><div className="mb-3 text-4xl">✅</div><p className="font-semibold text-gray-900">Help is coming!</p><p className="mt-1 text-sm text-gray-600">An electrician will call <strong>{phone}</strong>.</p><button onClick={resetChat} className="mt-4 text-sm font-medium text-purple-600 hover:underline">New request</button></div>)}
-          {error && <p className="text-center text-sm text-red-600">❌ {error}</p>}
-        </div>
-      </div>)}
-      <button onClick={() => setOpen(!open)} className="flex h-14 w-14 items-center justify-center rounded-full bg-purple-600 text-2xl text-white shadow-lg transition hover:bg-purple-700">⚡</button>
-    </div>
-  )
-}
+/* ──────── Chatbot imported from ../components/features/Chatbot ──────── */
 
 function Hero() {
   return (
@@ -295,7 +255,15 @@ export default function ElectricExpressDemo() {
         </div>
       </header>
       <main className="flex-1"><Hero /><ProblemSection /><ROISection /><SolutionSection /><TestimonialSection /><DemoSections /><PricingSection /><CTASection /></main>
-      <Footer /><ChatBubble />
+      <Footer />
+      {/* AI Chatbot floating bubble */}
+      <Chatbot theme="purple" icon="⚡" businessName="Electric Express CLT" issues={[
+        { value: 'Power outage', label: '🚨 Power outage' },
+        { value: 'Faulty wiring', label: '🔌 Faulty wiring' },
+        { value: 'Panel upgrade', label: '⚡ Panel upgrade' },
+        { value: 'Wiring inspection', label: '📋 Wiring inspection' },
+        { value: 'Other', label: 'Other' },
+      ]} />
     </div>
   )
 }

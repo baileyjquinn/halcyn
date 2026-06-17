@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { getSupabase } from '../lib/supabase'
+import Chatbot from '../components/features/Chatbot'
 
 /**
  * Hometown Electric NC — Halcyn Demo Landing Page
@@ -12,194 +13,7 @@ import { getSupabase } from '../lib/supabase'
  * Wedge: $497 setup + $49/mo — Projected ROI: 20-40x ($1,000–$2,000/mo)
  */
 
-/* ──────── Chat Bubble — AI Lead Capture Chatbot Simulation ──────── */
-
-function ChatBubble() {
-  const [open, setOpen] = useState(false)
-  const [step, setStep] = useState(0)
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [issue, setIssue] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-  const [sending, setSending] = useState(false)
-  const [error, setError] = useState('')
-  const messagesEndRef = useRef(null)
-
-  const botMessages = [
-    "Hi there! ⚡ Got an electrical issue? Tell me what's happening and I'll get an electrician to you ASAP.",
-    "Great, thanks! What's your name so the electrician knows who to look for?",
-    "Perfect! And a phone number so they can call before arriving?",
-    "Got it! One last thing — what's the electrical issue?",
-  ]
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [step, submitted])
-
-  function handleUserResponse(value) {
-    if (step === 1) setName(value)
-    else if (step === 2) setPhone(value)
-    else if (step === 3) setIssue(value)
-    if (step < 3) setStep(s => s + 1)
-  }
-
-  async function handleSubmit() {
-    setSending(true)
-    setError('')
-
-    const supabase = getSupabase()
-    const lead = {
-      name,
-      email: 'demo@hometownelectricnc.com',
-      phone,
-      message: `Electrical issue: ${issue} | Source: AI Chatbot Demo - Hometown Electric`,
-      source: 'chatbot-demo-hometown-electric',
-    }
-
-    if (!supabase) {
-      console.log('Lead captured (demo):', lead)
-      setSubmitted(true)
-      setSending(false)
-      return
-    }
-
-    const { error: err } = await supabase.from('leads').insert([lead])
-    if (err) {
-      setError(err.message)
-    } else {
-      setSubmitted(true)
-    }
-    setSending(false)
-  }
-
-  function resetChat() {
-    setStep(0)
-    setSubmitted(false)
-    setName('')
-    setPhone('')
-    setIssue('')
-    setError('')
-  }
-
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {open && (
-        <div className="w-80 sm:w-96 rounded-2xl border border-gray-200 bg-white shadow-2xl">
-          <div className="flex items-center gap-3 rounded-t-2xl bg-amber-600 px-4 py-3 text-white">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-lg font-bold">
-              ⚡
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Halcyn AI Assistant</p>
-              <p className="text-xs text-amber-200">Online • 24/7</p>
-            </div>
-          </div>
-
-          <div className="h-72 space-y-3 overflow-y-auto p-4">
-            {!submitted ? (
-              <>
-                <div className="flex">
-                  <div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2.5 text-sm text-gray-800">
-                    {botMessages[step]}
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  {step === 0 && (
-                    <button
-                      onClick={() => handleUserResponse('yes')}
-                      className="rounded-xl bg-amber-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-amber-700"
-                    >
-                      ⚡ I have an electrical issue
-                    </button>
-                  )}
-                  {step === 1 && (
-                    <input
-                      type="text"
-                      placeholder="Your name..."
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && name && handleUserResponse(name)}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
-                      autoFocus
-                    />
-                  )}
-                  {step === 2 && (
-                    <input
-                      type="tel"
-                      placeholder="(704) 555-..."
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && phone && handleUserResponse(phone)}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
-                      autoFocus
-                    />
-                  )}
-                  {step === 3 && (
-                    <div className="space-y-2">
-                      <select
-                        value={issue}
-                        onChange={(e) => setIssue(e.target.value)}
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
-                      >
-                        <option value="">Select issue...</option>
-                        <option value="Power outage - emergency">🚨 Power outage — Emergency!</option>
-                        <option value="Faulty wiring">🔌 Faulty wiring</option>
-                        <option value="Panel upgrade">⚡ Panel upgrade</option>
-                        <option value="Outlet not working">🔋 Dead outlet</option>
-                        <option value="Light fixture install">💡 Light fixture install</option>
-                        <option value="Electrical inspection">📋 Electrical inspection</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      {issue && (
-                        <button
-                          onClick={handleSubmit}
-                          disabled={sending}
-                          className="w-full rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700 disabled:opacity-60"
-                        >
-                          {sending ? 'Sending...' : '✅ Get Help Now'}
-                        </button>
-                      )}
-                    </div>
-                  )}
-                  {step > 0 && step < 3 && (
-                    <button
-                      onClick={() => handleUserResponse('')}
-                      className="mt-2 w-full rounded-xl bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-700"
-                    >
-                      Continue →
-                    </button>
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="flex flex-col items-center justify-center py-8 text-center">
-                <div className="mb-3 text-4xl">✅</div>
-                <p className="font-semibold text-gray-900">Help is on the way!</p>
-                <p className="mt-1 text-sm text-gray-600">
-                  An electrician will call you shortly at <strong>{phone}</strong>.
-                </p>
-                <button
-                  onClick={resetChat}
-                  className="mt-4 text-sm font-medium text-amber-600 hover:underline"
-                >
-                  Start new request
-                </button>
-              </div>
-            )}
-            {error && <p className="text-center text-sm text-red-600">❌ {error}</p>}
-          </div>
-        </div>
-      )}
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-600 text-2xl text-white shadow-lg transition hover:bg-amber-700 hover:shadow-xl"
-      >
-        {open ? '✕' : '⚡'}
-      </button>
-    </div>
-  )
-}
+/* ──────── Chatbot imported from ../components/features/Chatbot ──────── */
 
 /* ──────── Hero Section ──────── */
 
@@ -666,7 +480,14 @@ export default function HometownElectricDemo() {
         <CTASection />
       </main>
       <Footer />
-      <ChatBubble />
+      <Chatbot theme="amber" icon="⚡" businessName="Hometown Electric NC" issues={[
+        { value: 'Power outage', label: '🚨 Power outage' },
+        { value: 'Faulty wiring', label: '🔌 Faulty wiring' },
+        { value: 'Panel upgrade', label: '⚡ Panel upgrade' },
+        { value: 'Lighting install', label: '💡 Lighting install' },
+        { value: 'Wiring inspection', label: '📋 Wiring inspection' },
+        { value: 'Other', label: 'Other' },
+      ]} />
     </div>
   )
 }

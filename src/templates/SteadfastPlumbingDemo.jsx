@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { getSupabase } from '../lib/supabase'
+import Chatbot from '../components/features/Chatbot'
 
 /**
  * Steadfast Plumbing NC — Halcyn Demo Landing Page
@@ -11,50 +12,7 @@ import { getSupabase } from '../lib/supabase'
  * Wedge: $497 setup + $49/mo — Projected ROI: 56-84x ($2,750–$4,125/mo)
  */
 
-function ChatBubble() {
-  const [open, setOpen] = useState(false); const [step, setStep] = useState(0)
-  const [name, setName] = useState(''); const [phone, setPhone] = useState('')
-  const [issue, setIssue] = useState(''); const [submitted, setSubmitted] = useState(false)
-  const [sending, setSending] = useState(false); const [error, setError] = useState('')
-  const messagesEndRef = useRef(null)
-  const botMessages = ["Hi there! 💧 Need a plumber? Tell me what's going on.", "Great! What's your name?", "And a phone number so the plumber can call?", "Last thing — what's the plumbing issue?"]
-  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [step, submitted])
-  function handleUserResponse(value) { if (step === 1) setName(value); else if (step === 2) setPhone(value); else if (step === 3) setIssue(value); if (step < 3) setStep(s => s + 1) }
-  async function handleSubmit() {
-    setSending(true); setError(''); const supabase = getSupabase()
-    const lead = { name, email: 'demo@steadfastplumbnc.com', phone, message: `Plumbing issue: ${issue} | Steadfast Demo`, source: 'chatbot-steadfast' }
-    if (!supabase) { console.log('Lead:', lead); setSubmitted(true); setSending(false); return }
-    const { error: err } = await supabase.from('leads').insert([lead])
-    if (err) setError(err.message); else setSubmitted(true); setSending(false)
-  }
-  function resetChat() { setStep(0); setSubmitted(false); setName(''); setPhone(''); setIssue(''); setError('') }
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {open && (
-        <div className="w-80 sm:w-96 rounded-2xl border border-gray-200 bg-white shadow-2xl">
-          <div className="flex items-center gap-3 rounded-t-2xl bg-red-600 px-4 py-3 text-white">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-lg font-bold">🤖</div>
-            <div><p className="text-sm font-semibold">Halcyn AI Assistant</p><p className="text-xs text-red-200">Online • 24/7</p></div>
-          </div>
-          <div className="h-72 space-y-3 overflow-y-auto p-4">
-            {!submitted ? (<>
-              <div className="flex"><div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2.5 text-sm text-gray-800">{botMessages[step]}</div></div>
-              <div className="mt-2">
-                {step === 0 && <button onClick={() => handleUserResponse('yes')} className="rounded-xl bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700">💧 I need a plumber</button>}
-                {step === 1 && <input type="text" placeholder="Your name..." value={name} onChange={e => setName(e.target.value)} onKeyDown={e => e.key === 'Enter' && name && handleUserResponse(name)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-red-500 focus:ring-2 focus:ring-red-200" autoFocus />}
-                {step === 2 && <input type="tel" placeholder="(704) 555-..." value={phone} onChange={e => setPhone(e.target.value)} onKeyDown={e => e.key === 'Enter' && phone && handleUserResponse(phone)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-red-500 focus:ring-2 focus:ring-red-200" autoFocus />}
-                {step === 3 && (<div className="space-y-2"><select value={issue} onChange={e => setIssue(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-red-500 focus:ring-2 focus:ring-red-200"><option value="">Select issue...</option><option value="Burst pipe">🚨 Burst pipe</option><option value="Water heater">🔥 Water heater</option><option value="Clogged drain">🚿 Clogged drain</option><option value="Leaky faucet">💧 Leaky faucet</option><option value="Sewer backup">⚠️ Sewer backup</option><option value="Other">Other</option></select>{issue && <button onClick={handleSubmit} disabled={sending} className="mt-2 w-full rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700 disabled:opacity-60">{sending ? 'Sending...' : '✅ Get Help Now'}</button>}</div>)}
-                {step > 0 && step < 3 && <button onClick={() => handleUserResponse('')} className="mt-2 w-full rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700">Continue →</button>}
-              </div>
-            </>) : (<div className="flex flex-col items-center justify-center py-8 text-center"><div className="mb-3 text-4xl">✅</div><p className="font-semibold text-gray-900">Help is on the way!</p><p className="mt-1 text-sm text-gray-600">A plumber will call <strong>{phone}</strong>.</p><button onClick={resetChat} className="mt-4 text-sm font-medium text-red-600 hover:underline">Start new request</button></div>)}
-            {error && <p className="text-center text-sm text-red-600">❌ {error}</p>}
-          </div>
-        </div>
-      )}
-      <button onClick={() => setOpen(!open)} className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 text-2xl text-white shadow-lg transition hover:bg-red-700">💬</button>
-    </div>
-  )
-}
+/* ──────── Chatbot imported from ../components/features/Chatbot with securityAlert mode ──────── */
 
 function Hero() {
   return (
@@ -302,7 +260,16 @@ export default function SteadfastPlumbingDemo() {
         </div>
       </header>
       <main className="flex-1"><Hero /><ProblemSection /><ROISection /><SolutionSection /><TestimonialSection /><DemoSections /><PricingSection /><CTASection /></main>
-      <Footer /><ChatBubble />
+      <Footer />
+      {/* AI Chatbot with Security Audit mode — leads with "Not Secure" warning */}
+      <Chatbot theme="red" icon="🔒" businessName="Steadfast Plumbing NC" securityAlert issues={[
+        { value: 'Burst pipe', label: '🚨 Burst pipe' },
+        { value: 'Water heater', label: '🔥 Water heater' },
+        { value: 'Clogged drain', label: '🚿 Clogged drain' },
+        { value: 'Leaky faucet', label: '💧 Leaky faucet' },
+        { value: 'Sewer backup', label: '⚠️ Sewer backup' },
+        { value: 'Other', label: 'Other' },
+      ]} />
     </div>
   )
 }
