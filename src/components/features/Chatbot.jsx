@@ -20,6 +20,7 @@ const themeMap = {
   red: { bg: 'bg-red-600', hover: 'hover:bg-red-700', ring: 'focus:ring-red-200', border: 'focus:border-red-500', light: 'bg-red-50', text: 'text-red-200' },
   teal: { bg: 'bg-teal-600', hover: 'hover:bg-teal-700', ring: 'focus:ring-teal-200', border: 'focus:border-teal-500', light: 'bg-teal-50', text: 'text-teal-200' },
   purple: { bg: 'bg-purple-600', hover: 'hover:bg-purple-700', ring: 'focus:ring-purple-200', border: 'focus:border-purple-500', light: 'bg-purple-50', text: 'text-purple-200' },
+  green: { bg: 'bg-green-600', hover: 'hover:bg-green-700', ring: 'focus:ring-green-200', border: 'focus:border-green-500', light: 'bg-green-50', text: 'text-green-200' },
 }
 
 const defaultIssues = [

@@ -18,6 +18,7 @@ import HometownElectricDemo from './templates/HometownElectricDemo.jsx'
 import SteadfastPlumbingDemo from './templates/SteadfastPlumbingDemo.jsx'
 import DrainRightPlumbingDemo from './templates/DrainRightPlumbingDemo.jsx'
 import ElectricExpressDemo from './templates/ElectricExpressDemo.jsx'
+import LandscapingDemo from './templates/LandscapingDemo.jsx'
 
 const demos = {
   'south-end':  { component: SouthEndPlumbingDemo,  name: 'South End Plumbing',       theme: 'blue',   icon: '💧' },
@@ -25,6 +26,7 @@ const demos = {
   'steadfast':  { component: SteadfastPlumbingDemo,  name: 'Steadfast Plumbing NC',    theme: 'red',    icon: '🔒' },
   'drain-right':{ component: DrainRightPlumbingDemo, name: 'Drain Right Plumbing',     theme: 'teal',   icon: '💧' },
   'electric-express':{component: ElectricExpressDemo,name: 'Electric Express CLT',     theme: 'purple', icon: '⚡' },
+  'landscaping':    { component: LandscapingDemo,     name: 'Artificial Turf Products', theme: 'green',  icon: '🌿' },
 }
 
 const themeClasses = {
@@ -33,6 +35,7 @@ const themeClasses = {
   red: { bg: 'bg-red-600', hover: 'hover:bg-red-700', text: 'text-red-600' },
   teal: { bg: 'bg-teal-600', hover: 'hover:bg-teal-700', text: 'text-teal-600' },
   purple: { bg: 'bg-purple-600', hover: 'hover:bg-purple-700', text: 'text-purple-600' },
+  green: { bg: 'bg-green-600', hover: 'hover:bg-green-700', text: 'text-green-600' },
 }
 
 function LandingPage() {
