@@ -4,7 +4,7 @@
  * Available templates:
  *   SouthEndPlumbingDemo — plumbing, dark blue
  *   HometownElectricDemo — electrician, amber/orange
- *   SteadfastPlumbingDemo — plumbing, red/urgency (security audit mode)
+ *   SteadfastPlumbingDemo — mechanical, red/urgency (security audit mode)
  *   DrainRightPlumbingDemo — plumbing, teal
  *   ElectricExpressDemo — electrician, purple
  *
@@ -23,7 +23,7 @@ import LandscapingDemo from './templates/LandscapingDemo.jsx'
 const demos = {
   'south-end':  { component: SouthEndPlumbingDemo,  name: 'South End Plumbing',       theme: 'blue',   icon: '💧' },
   'hometown':   { component: HometownElectricDemo,   name: 'Hometown Electric NC',     theme: 'amber',  icon: '⚡' },
-  'steadfast':  { component: SteadfastPlumbingDemo,  name: 'Steadfast Plumbing NC',    theme: 'red',    icon: '🔒' },
+  'steadfast':  { component: SteadfastPlumbingDemo,  name: 'Steadfast Mechanical & Services',    theme: 'red',    icon: '🔒' },
   'drain-right':{ component: DrainRightPlumbingDemo, name: 'Drain Right Plumbing',     theme: 'teal',   icon: '💧' },
   'electric-express':{component: ElectricExpressDemo,name: 'Electric Express CLT',     theme: 'purple', icon: '⚡' },
   'landscaping':    { component: LandscapingDemo,     name: 'Artificial Turf Products', theme: 'green',  icon: '🌿' },

@@ -3,7 +3,7 @@ import { getSupabase } from '../lib/supabase'
 import Chatbot from '../components/features/Chatbot'
 
 /**
- * Steadfast Plumbing NC — Halcyn Demo Landing Page
+ * Steadfast Mechanical & Services — Halcyn Demo Landing Page
  *
  * For a business with a website that has a "Not Secure" warning and broken mobile form.
  * Angle: "Your website is actively scaring customers away"
@@ -19,7 +19,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-gradient-to-br from-red-900 via-red-800 to-rose-900 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-block rounded-full bg-red-500/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-red-200">Steadfast Plumbing NC • Charlotte, NC</span>
+          <span className="inline-block rounded-full bg-red-500/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-red-200">Steadfast Mechanical & Services • Charlotte, NC</span>
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Your Website Is <span className="bg-gradient-to-r from-red-300 to-rose-300 bg-clip-text text-transparent">Scaring Customers Away</span></h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-red-100 sm:text-xl">Chrome shows a "Not Secure" warning on every page. Your mobile contact form doesn't work. In 2025, that's costing you thousands every month.</p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -119,7 +119,7 @@ function SolutionSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-red-600">The Halcyn Solution</span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything Steadfast Plumbing Needs</h2>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything Steadfast Mechanical Needs</h2>
           <p className="mt-4 text-lg text-gray-600">Fix the security warning, modernize the design, add AI booking — all in one week.</p>
         </div>
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{features.map(f => (
@@ -138,8 +138,8 @@ function DemoSections() {
   function handleChange(e) { setForm(p => ({ ...p, [e.target.name]: e.target.value })) }
   async function handleSubmit(e) {
     e.preventDefault(); setStatus('loading'); setErrorMsg(''); const supabase = getSupabase()
-    if (!supabase) { console.log('Steadfast lead:', form); setStatus('success'); setForm({ name: '', email: '', phone: '', message: '' }); return }
-    const { error } = await supabase.from('leads').insert([{ name: form.name, email: form.email, phone: form.phone || null, message: form.message || 'Steadfast Plumbing demo interest', source: 'steadfast-plumbing-demo' }])
+    if (!supabase) { console.log('Steadfast Mechanical lead:', form); setStatus('success'); setForm({ name: '', email: '', phone: '', message: '' }); return }
+    const { error } = await supabase.from('leads').insert([{ name: form.name, email: form.email, phone: form.phone || null, message: form.message || 'Steadfast Mechanical & Services demo interest', source: 'steadfast-mechanical-demo' }])
     if (error) { setStatus('error'); setErrorMsg(error.message); return }
     setStatus('success'); setForm({ name: '', email: '', phone: '', message: '' })
   }
@@ -150,7 +150,7 @@ function DemoSections() {
           <div className="text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-red-300">Live Demo</span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">See What a Secure, Modern Site Looks Like</h2>
-            <p className="mt-4 text-lg text-red-200">Click the 💬 chat bubble. This is what Steadfast Plumbing's 24/7 lead capture looks like.</p>
+            <p className="mt-4 text-lg text-red-200">Click the 💬 chat bubble. This is what Steadfast Mechanical & Services' 24/7 lead capture looks like.</p>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             <div className="rounded-xl border border-red-700/50 bg-red-800/30 p-6 text-center backdrop-blur-sm"><span className="text-3xl">1️⃣</span><h3 className="mt-3 font-semibold text-white">Click Chat</h3><p className="mt-1 text-sm text-red-200">Open the AI assistant</p></div>
@@ -199,7 +199,7 @@ function PricingSection() {
         <span className="text-sm font-semibold uppercase tracking-wider text-gray-500">Simple Pricing</span>
         <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">One Price. Everything Included.</h2>
         <div className="mx-auto mt-10 max-w-sm rounded-2xl border-2 border-red-200 bg-white p-8 shadow-lg">
-          <p className="text-sm font-semibold uppercase tracking-wider text-red-600">Steadfast Plumbing — Fix Your Site Offer</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-red-600">Steadfast Mechanical & Services — Fix Your Site Offer</p>
           <p className="mt-4"><span className="text-5xl font-extrabold text-gray-900">$49</span><span className="text-gray-500">/mo</span></p>
           <p className="mt-1 text-sm text-gray-500">+ <strong>$497</strong> one-time setup</p>
           <ul className="mt-6 space-y-3 text-left text-sm text-gray-600">
@@ -223,7 +223,7 @@ function CTASection() {
     <section className="bg-gradient-to-r from-red-600 to-rose-700 py-16 sm:py-20">
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
         <h2 className="text-3xl font-bold text-white sm:text-4xl">Fix Your "Not Secure" Warning Today</h2>
-        <p className="mt-4 text-lg text-red-100">Steadfast Plumbing — you do great work. Let's make sure your website reflects that.</p>
+        <p className="mt-4 text-lg text-red-100">Steadfast Mechanical & Services — you do great work. Let's make sure your website reflects that.</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a href="#lead-capture" className="inline-block rounded-xl bg-white px-8 py-3.5 text-sm font-semibold text-red-700 shadow-lg transition hover:bg-red-50">🔒 Get My Demo Site</a>
           <a href="#roi" className="inline-block rounded-xl border border-red-400/40 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-red-700/30">See the Math</a>
@@ -238,7 +238,7 @@ function Footer() {
     <footer className="border-t border-gray-200 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Halcyn. Built for Steadfast Plumbing NC — Charlotte, NC.</p>
+          <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Halcyn. Built for Steadfast Mechanical & Services — Charlotte, NC.</p>
           <p className="text-sm text-gray-500">Demo landing page. <a href="https://github.com/baileyjquinn/halcyn" className="text-red-600 hover:underline">View on GitHub</a></p>
         </div>
       </div>
@@ -262,7 +262,7 @@ export default function SteadfastPlumbingDemo() {
       <main className="flex-1"><Hero /><ProblemSection /><ROISection /><SolutionSection /><TestimonialSection /><DemoSections /><PricingSection /><CTASection /></main>
       <Footer />
       {/* AI Chatbot with Security Audit mode — leads with "Not Secure" warning */}
-      <Chatbot theme="red" icon="🔒" businessName="Steadfast Plumbing NC" securityAlert issues={[
+      <Chatbot theme="red" icon="🔒" businessName="Steadfast Mechanical & Services" securityAlert issues={[
         { value: 'Burst pipe', label: '🚨 Burst pipe' },
         { value: 'Water heater', label: '🔥 Water heater' },
         { value: 'Clogged drain', label: '🚿 Clogged drain' },
