@@ -8,7 +8,7 @@
  *   DrainRightPlumbingDemo — plumbing, teal
  *   ElectricExpressDemo — electrician, purple
  *
- * Usage: ?demo=steadfast (or hometown, south-end, drain-right, electric-express)
+ * Usage: ?demo=steadfast (or hometown, south-end, drain-right, electric-express, landscaping, admin)
  * Default: Landing page with links to all demos
  */
 
@@ -19,6 +19,7 @@ import SteadfastPlumbingDemo from './templates/SteadfastPlumbingDemo.jsx'
 import DrainRightPlumbingDemo from './templates/DrainRightPlumbingDemo.jsx'
 import ElectricExpressDemo from './templates/ElectricExpressDemo.jsx'
 import LandscapingDemo from './templates/LandscapingDemo.jsx'
+import AdminDashboard from './templates/AdminDashboard.jsx'
 
 const demos = {
   'south-end':  { component: SouthEndPlumbingDemo,  name: 'South End Plumbing',       theme: 'blue',   icon: '💧' },
@@ -27,6 +28,7 @@ const demos = {
   'drain-right':{ component: DrainRightPlumbingDemo, name: 'Drain Right Plumbing',     theme: 'teal',   icon: '💧' },
   'electric-express':{component: ElectricExpressDemo,name: 'Electric Express CLT',     theme: 'purple', icon: '⚡' },
   'landscaping':    { component: LandscapingDemo,     name: 'Artificial Turf Products', theme: 'green',  icon: '🌿' },
+  'admin':          { component: AdminDashboard,      name: 'Lead Dashboard',           theme: 'cyan',  icon: '📊' },
 }
 
 const themeClasses = {
@@ -36,6 +38,7 @@ const themeClasses = {
   teal: { bg: 'bg-teal-600', hover: 'hover:bg-teal-700', text: 'text-teal-600' },
   purple: { bg: 'bg-purple-600', hover: 'hover:bg-purple-700', text: 'text-purple-600' },
   green: { bg: 'bg-green-600', hover: 'hover:bg-green-700', text: 'text-green-600' },
+  cyan: { bg: 'bg-cyan-600', hover: 'hover:bg-cyan-700', text: 'text-cyan-600' },
 }
 
 function LandingPage() {
