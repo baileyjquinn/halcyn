@@ -78,6 +78,7 @@ export default function Chatbot({ theme = 'blue', icon = '💬', businessName = 
       phone: form.phone,
       message: `Issue: ${form.issue} | Source: Chatbot - ${businessName}`,
       source: `chatbot-${businessName.toLowerCase().replace(/\s+/g, '-')}`,
+      business_id: `biz-${businessName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
     }
     if (!supabase) { console.log('Lead:', lead); setSubmitted(true); setSending(false); return }
     const { error: err } = await supabase.from('leads').insert([lead])

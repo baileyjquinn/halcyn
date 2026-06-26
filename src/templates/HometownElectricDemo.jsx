@@ -287,6 +287,7 @@ function DemoSections() {
       phone: form.phone || null,
       message: form.message || 'Hometown Electric NC demo interest',
       source: 'hometown-electric-demo',
+      business_id: 'biz-hometown-electric-nc',
     }])
 
     if (error) { setStatus('error'); setErrorMsg(error.message); return }
