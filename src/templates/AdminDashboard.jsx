@@ -225,6 +225,7 @@ export default function AdminDashboard() {
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Email</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Phone</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Source</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Business ID</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Message</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Status</th>
                 </tr>
@@ -248,6 +249,9 @@ export default function AdminDashboard() {
                       <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
                         {sourceLabel(lead.source)}
                       </span>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-3">
+                      <code className="rounded bg-gray-50 px-1.5 py-0.5 text-xs text-gray-500">{lead.business_id || '—'}</code>
                     </td>
                     <td className="max-w-xs truncate px-4 py-3 text-gray-600">{lead.message || '—'}</td>
                     <td className="whitespace-nowrap px-4 py-3">

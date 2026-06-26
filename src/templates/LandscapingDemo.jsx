@@ -136,7 +136,7 @@ function DemoSections() {
   async function handleSubmit(e) {
     e.preventDefault(); setStatus('loading'); setErrorMsg(''); const supabase = getSupabase()
     if (!supabase) { console.log('Artificial Turf Products lead:', form); setStatus('success'); setForm({ name: '', email: '', phone: '', message: '' }); return }
-    const { error } = await supabase.from('leads').insert([{ name: form.name, email: form.email, phone: form.phone || null, message: form.message || 'Artificial Turf Products demo interest', source: 'artificial-turf-demo' }])
+    const { error } = await supabase.from('leads').insert([{ name: form.name, email: form.email, phone: form.phone || null, message: form.message || 'Artificial Turf Products demo interest', source: 'artificial-turf-demo', business_id: 'biz-artificial-turf-products' }])
     if (error) { setStatus('error'); setErrorMsg(error.message); return }
     setStatus('success'); setForm({ name: '', email: '', phone: '', message: '' })
   }
